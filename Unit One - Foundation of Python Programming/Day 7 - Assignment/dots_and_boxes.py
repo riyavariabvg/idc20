@@ -1,3 +1,7 @@
+# This is a dots and boxes that allows you to keep track of your results while playing the game "Dots and Boxes".
+# You will play against five different opponents in your class
+# The program will calculate various statistics, including the percentage of boxes created and the percentage of points received.
+
 name = input("Enter your name: ")
 
 # User inputs data for all 5 dots and boxes games 
@@ -39,6 +43,7 @@ opponent_pts_total = game1_opponent_pts + game2_opponent_pts + game3_opponent_pt
 
 # Calculates the percentage of boxes you created out of the maximum possible boxes across all 5 games
 # There are 180 boxes in total (36*5)
+# The percentage will be in decimal form 
 my_percentage_of_total_pts = my_pts_total/(36*5)
 
 
