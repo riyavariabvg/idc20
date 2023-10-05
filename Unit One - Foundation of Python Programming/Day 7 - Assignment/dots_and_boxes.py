@@ -1,5 +1,6 @@
 # This is a dots and boxes score tracker that allows you to keep track of your results while playing the game "Dots and Boxes".
 # You will play against five different opponents in your class
+# The grid is 7x7 (36 boxes in total)
 # The program will calculate various statistics, including the percentage of boxes created and the percentage of points received.
 
 name = input("Enter your name: ")
