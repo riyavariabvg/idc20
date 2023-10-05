@@ -1,4 +1,4 @@
-# This is a dots and boxes that allows you to keep track of your results while playing the game "Dots and Boxes".
+# This is a dots and boxes score tracker that allows you to keep track of your results while playing the game "Dots and Boxes".
 # You will play against five different opponents in your class
 # The program will calculate various statistics, including the percentage of boxes created and the percentage of points received.
 
