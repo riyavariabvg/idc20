@@ -27,4 +27,4 @@ print(f"{x:.1}") # 5e+01 -> scientific notation 5 x 10^1
 # when we don't put the f, it includes how many spots that we are including for the whole number
 
 y = 5.5859238093840
-print(f"{y:.1}")     # 6e+00 -> scientific notation 6 x 10^0
+print(f"{y:.2}")     # 6e+00 -> scientific notation 6 x 10^0
