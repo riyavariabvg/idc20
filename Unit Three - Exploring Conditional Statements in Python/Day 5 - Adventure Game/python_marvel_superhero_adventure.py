@@ -1,3 +1,8 @@
+''' This game is a text-based Marvel adventure game. This game lets you pick your superhero and gives you a random number of 
+health points between 75 and 100. 
+The game prompts you with decisions. Based on your decisions, you will take damage (lose health points) and/or 
+gain bonus points which increases your health. Your health score at the end of the game determines whether you lose or survive.  '''
+
 import random 
 
 # This function allows the player to choose their Marvel superhero and returns the superhero's name and current health number 
