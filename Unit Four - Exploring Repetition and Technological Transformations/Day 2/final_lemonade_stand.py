@@ -7,7 +7,6 @@ import random
 import os
 import time
 
-# Global variables 
 assets = 200
 day = 1
 lemonade_cost = 2
@@ -59,6 +58,7 @@ def convert_string_to_integer(s):
     return True, val
 
 def get_glasses_made():
+    # declaring assets as a global variable so its value can be changed inside the function 
     global assets
 
     while True:
@@ -109,9 +109,17 @@ def get_charge_per_glass():
     return charge_per_glass
 
 def get_player_input():
-    glasses_made = get_glasses_made()
-    num_of_signs = get_num_of_signs()
-    charge_per_glass = get_charge_per_glass()
+    global assets
+    change = "yes"
+    original_assets = assets
+    # This loop checks if the user would like to change their answers 
+    while change.lower() == "yes":
+        assets = original_assets
+        glasses_made = get_glasses_made()
+        num_of_signs = get_num_of_signs()
+        charge_per_glass = get_charge_per_glass()
+        change = input("Would you like to change anything? ")
+
     return glasses_made, num_of_signs, charge_per_glass
 
 # Calculate the customers at your stand based on the number of advertising signs inputted by the user
@@ -147,7 +155,7 @@ def get_glasses_sold(customers_at_stand, charge_per_glass, glasses_made):
             # if the charge per glass is less than or equal to 10 cents, every customer at the stand will buy a glass of lemonade
             customers_who_buy_lemonade = customers_at_stand
         elif 10 < charge_per_glass < 20:
-            customers_who_buy_lemonade = round(customers_at_stand * 0.7)
+            customers_who_buy_lemonade = round(customers_at_stand * 0.6)
         elif 20 <= charge_per_glass <= 30:
             customers_who_buy_lemonade = round(customers_at_stand * 0.5)
         elif 30 < charge_per_glass < 40:
@@ -185,7 +193,7 @@ def execute_one_round_of_game():
     global day, lemonade_cost, assets, weather, total_profit
     cls()
     weather = get_weather()
-    # Updates the price of lemonade every 5 days by $0.02
+    # Updates the price of lemonade every 5 days by adding $0.02
     if day%5 == 0:
         lemonade_cost = lemonade_cost + 2
     print(f"\nDay {day}: Today, it is {weather}!")
@@ -221,14 +229,15 @@ def execute_one_round_of_game():
     day += 1
 
 
-def execute_game():
+def main():
     # This is the main function of the game
     # It starts with an intro, and then continues to play rounds of the game until the user indicates they want to stop
     print_lemonade_stand_intro()
     
     keep_playing = True
     while keep_playing:
-        response_to_keep_playing = input("Would you like to keep playing? ")
+        # \n indicates new line
+        response_to_keep_playing = input("\nWould you like to keep playing? ")
         if response_to_keep_playing.lower() == "no":
             keep_playing = False
         else:
@@ -242,4 +251,4 @@ def end_game():
     
 
 
-execute_game()
+main()
