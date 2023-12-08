@@ -33,12 +33,13 @@ def print_lemonade_stand_intro():
     print(f"Your current assets are ${assets/100:.2f} and the cost of lemonade is ${lemonade_cost/100}.")
 
 # Randomly generates the weather based on probabilities for each weather condition
+# The highest probability is sunny, then cloudy, then rainy 
 def get_weather():
     weather_conditions = ["sunny", "cloudy", "rainy"]
     probabilities = {"sunny": 0.6, "cloudy": 0.3, "rainy": 0.1}
     return random.choices(weather_conditions, weights=probabilities.values())[0]
 
-# This function gets the people outside on that day based on the weather 
+# This function gets the people who are outside on that day based on the weather 
 def get_people_outside():
     if weather == "sunny":
         people_outside = round(random.uniform(population*0.4, population*0.6))
@@ -48,8 +49,7 @@ def get_people_outside():
         people_outside = round(random.uniform(population*0.2, population*0.3))
     return people_outside
 
-# Checks if a string is an integer - if it is, the function will return the True and the integer. 
-# Otherwise, the function will return False and 0. 
+# This function checks if a string is an integer and returns two values 
 def convert_string_to_integer(s):
     try:
         val = int(s)
@@ -66,12 +66,15 @@ def get_glasses_made():
         conversion_works, glasses_made = convert_string_to_integer(glasses_made)
         # Checks to see if the user input is an integer 
         if not conversion_works:
-            print("Error: You did not enter a number, please try again")
+            print("Error: You did not enter an integer, please try again")
             continue # cycles back to the beginning of the loop 
 
         # Checks to see if the user has enough money 
         elif glasses_made * lemonade_cost > assets:
             print("You don't have enough money for this. ")
+        
+        elif glasses_made < 0:
+            print("You cannot enter a negative number. ")
         else:
             break
     
@@ -85,12 +88,15 @@ def get_num_of_signs():
         conversion_works, num_of_signs = convert_string_to_integer(num_of_signs)
         # Checks to see if the user input is an integer 
         if not conversion_works:
-            print("Error: You did not enter a number, please try again")
+            print("Error: You did not enter an integer, please try again")
             continue     
         
         # Checks to see if the user has enough money 
         elif num_of_signs * 15 > assets:
             print("You don't have enough money for this. ")
+        
+        elif num_of_signs < 0:
+            print("You cannot enter a negative number. ")
         else:
             break
     
@@ -103,7 +109,10 @@ def get_charge_per_glass():
         charge_per_glass = input("How much would you like to charge for each glass of lemonade (cents)? ")
         conversion_works, charge_per_glass = convert_string_to_integer(charge_per_glass)
         if not conversion_works:
-            print("Error: You did not enter a number, please try again")
+            print("Error: You did not enter an integer, please try again")
+        
+        elif charge_per_glass < 0:
+            print("You cannot enter a negative number. ")
         else:
             break
     return charge_per_glass
@@ -135,7 +144,7 @@ def calculate_customers_based_on_advertising(num_of_signs):
 def get_customers_who_see_stand():
     return random.randint(10, 30)
 
-# Calculates the number of customers at the stand 
+# Calculates the number of customers at the stand in total 
 def get_customers_at_stand(num_of_signs):
     customers_based_on_advertising = calculate_customers_based_on_advertising(num_of_signs)
     customers_who_see_stand = get_customers_who_see_stand()
@@ -146,7 +155,8 @@ def get_customers_at_stand(num_of_signs):
         
 
 # This function finds the glasses of lemonade sold using the number of customers at the stand. It finds 
-# the number of customers who are interested in buying lemonade based on weather and the charge per glass. 
+# the number of customers who are interested in buying lemonade based on weather and the charge per glass.
+# Ex. When the weather is sunny, even if the price per glass is higher, more people will be willing to buy lemonade 
 # Returns the number of glasses sold.
 def get_glasses_sold(customers_at_stand, charge_per_glass, glasses_made):
     customers_who_buy_lemonade = 0
@@ -193,7 +203,7 @@ def execute_one_round_of_game():
     global day, lemonade_cost, assets, weather, total_profit
     cls()
     weather = get_weather()
-    # Updates the price of lemonade every 5 days by adding $0.02
+    # Updates the cost of lemonade every 5 days by adding $0.02
     if day%5 == 0:
         lemonade_cost = lemonade_cost + 2
     print(f"\nDay {day}: Today, it is {weather}!")
@@ -211,10 +221,11 @@ def execute_one_round_of_game():
 
     print()
     print(f"Day {day}")
-    print(f"{glasses_sold:.0f} glasses sold")
-    print(f"${charge_per_glass / 100:.2f} per glass")
     print(f"{glasses_made} glasses made")
     print(f"{num_of_signs} signs made")
+    print(f"{glasses_sold:.0f} glasses sold")
+    print(f"${charge_per_glass / 100:.2f} per glass")
+
     print()
     print(f"Income: ${income / 100:.2f}")
     print(f"Expenses: ${expenses / 100:.2f}")
