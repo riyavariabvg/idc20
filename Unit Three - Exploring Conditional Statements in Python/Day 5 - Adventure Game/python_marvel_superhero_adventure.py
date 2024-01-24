@@ -197,7 +197,7 @@ def captain_america_assistance(random_villain):
     print("")
     if decision == "1":
         print(f"You did not have enough time to get a team together. {random_villain} has taken over the city.")
-        damage_taken = 89
+        damage_taken = 120
         bonus = 2
         print(f"Damage taken: {damage_taken}")
         print(f"Bonus pts: {bonus}")
