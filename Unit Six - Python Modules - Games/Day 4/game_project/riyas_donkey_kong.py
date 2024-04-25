@@ -13,7 +13,7 @@ from pygame import mixer
 # initialize pygame
 pygame.init()
 
-# set up the screen dimensions and frames per second
+# set  up the screen dimensions and frames per second
 WIDTH, HEIGHT = 1000, 800
 fps = 60
 
@@ -258,7 +258,7 @@ class Fireball(pygame.sprite.Sprite):
 
 # function to draw platforms 
 def draw_platform(x_pos, y_pos, length):
-    x_pos *= section_width
+    x_pos = x_pos* section_width
     platform = pygame.rect.Rect((x_pos, y_pos), (length * section_width, section_height))
     pygame.draw.rect(screen, 'white', platform)
     return platform 
@@ -273,7 +273,7 @@ def draw_ladder(x_pos, y_pos, length):
             bot_coord = top_coord + lad_height * section_height
             mid_coord = (lad_height / 2) * section_height + top_coord
             left_coord = x_pos
-            right_coord = left_coord + section_width
+            right_coord = left_coord + section_width # this means that the width of the ladder will be the section width 
             pygame.draw.line(screen, lad_color, (left_coord, top_coord), (left_coord, bot_coord), line_width)
             pygame.draw.line(screen, lad_color, (right_coord, top_coord), (right_coord, bot_coord), line_width)
             pygame.draw.line(screen, lad_color, (left_coord, mid_coord), (right_coord, mid_coord), line_width)
@@ -282,8 +282,8 @@ def draw_ladder(x_pos, y_pos, length):
 
 # function to get rectangular value for ladder
 def get_rect_value_for_ladder(x_pos, y_pos, length):
-    lad_height = 0.6
-    rect_value = pygame.rect.Rect((x_pos, y_pos - section_height), (section_width, (lad_height * length * section_height +section_height)))
+    lad_height = 0.6 
+    rect_value = pygame.rect.Rect((x_pos, y_pos - section_height), (section_width, (lad_height * length * section_height +section_height))) # this line makes the rect value of the ladder extend to the platforms so that the mario character can climb the ladder
     return rect_value
 
 # function to draw the game screen
@@ -312,7 +312,7 @@ def check_climb():
 
     if (not able_to_climb and (not able_to_climb_down or player.y_change < 0)) or (player.landed and able_to_climb and player.y_change > 0 and not able_to_climb_down):
         player.climbing = False
-    return able_to_climb, able_to_climb_down
+    return able_to_climb, able_to_climb_down 
 
 # create player instance of the mario class
 player = Mario(50,650)
